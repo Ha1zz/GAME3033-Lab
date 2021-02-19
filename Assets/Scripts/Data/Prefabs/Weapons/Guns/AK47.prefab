@@ -46,6 +46,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GripIKLocation: {fileID: 2773713498604331477}
+  WeaponStats:
+    Name: AK47
+    Damage: 10
+    BulletsInClip: 20
+    ClipSize: 20
+    TotalBulletsAvailable: 100
+    FireStartDelay: 0
+    FireRate: 0.1
+    FireDistance: 100
+    Repeating: 1
+    WeaponHitLayer:
+      serializedVersion: 2
+      m_Bits: 4294967295
+  Firing: 0
+  Reloading: 0
 --- !u!1 &7969408002327846844
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +103,10 @@ PrefabInstance:
       value: SM_Wep_AssaultRifle_01
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.044
       objectReference: {fileID: 0}
@@ -100,6 +119,10 @@ PrefabInstance:
       value: -0.024
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.591044
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.39650473
       objectReference: {fileID: 0}
@@ -110,14 +133,6 @@ PrefabInstance:
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.5766621
-      objectReference: {fileID: 0}
-    - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.591044
-      objectReference: {fileID: 0}
-    - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

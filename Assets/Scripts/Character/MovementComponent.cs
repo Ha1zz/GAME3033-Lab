@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+namespace Character { 
 public class MovementComponent : MonoBehaviour
 {
 
@@ -79,5 +80,7 @@ public class MovementComponent : MonoBehaviour
         PlayerTransform.position += movementDirection;
     }
 
-   
+
+}
+
 }
