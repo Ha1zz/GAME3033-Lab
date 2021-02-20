@@ -14,13 +14,20 @@ public class WeaponHolder : InputMonoBehaviour
     private Transform GripIKLocation;
 
     // Components
+    public PlayerController Controller => PlayerController;
     PlayerController PlayerController;
     Crosshair PlayerCrossHair;
     Animator PlayerAnimator;
 
+    //
+    private bool WasFiring = false;
+    private bool FiringPressed = false;
+
     // Ref
-    Camera ViewCamera;
+    private Camera ViewCamera;
     private WeaponComponent EquippedWeapon;
+
+    // AnimatorHashes
 
     private new void Awake()
     {
@@ -51,6 +58,7 @@ public class WeaponHolder : InputMonoBehaviour
         }
 
         EquippedWeapon.Initialize(this, PlayerController.CrossHair);
+        //PlayerAnimator.SetInteger("WeaponType", (int)EquippedWeapon.WeaponStats.WeaponType);
         PlayerEvents.Invoke_OnWeaponEquipped(EquippedWeapon);
     }
 
@@ -69,23 +77,37 @@ public class WeaponHolder : InputMonoBehaviour
     //    PlayerAnimator.SetBool("IsFiring", pressed.isPressed);
     //}
 
+    private void StartFiring()
+    {
+        if (EquippedWeapon.WeaponStats.TotalBulletsAvailable <= 0 &&
+            EquippedWeapon.WeaponStats.BulletsInClip <= 0) return;
+
+        PlayerController.IsFiring = true;
+        PlayerAnimator.SetBool("IsFiring", PlayerController.IsFiring);
+        EquippedWeapon.StartFiring();
+    }
+
+    private void StopFiring()
+    {
+        PlayerController.IsFiring = false;
+        PlayerAnimator.SetBool("IsFiring", PlayerController.IsFiring);
+        EquippedWeapon.StopFiring();
+    }
+
     public void OnReload(InputValue button)
     {
         StartReloading();
     }
     public void OnFire(InputValue button)
     {
+        FiringPressed = button.isPressed;
         if (button.isPressed)
         {
-            PlayerController.IsFiring = true;
-            PlayerAnimator.SetBool("IsFiring", PlayerController.IsFiring);
-            EquippedWeapon.StartFiring();
+            StartFiring();
         }
         else
         {
-            PlayerController.IsFiring = false;
-            PlayerAnimator.SetBool("IsFiring", PlayerController.IsFiring);
-            EquippedWeapon.StopFiring();
+            StopFiring();
         }
     }
 
@@ -111,6 +133,13 @@ public class WeaponHolder : InputMonoBehaviour
 
     public void StartReloading()
     {
+        if (EquippedWeapon.WeaponStats.TotalBulletsAvailable <= 0 &&
+            PlayerController.IsFiring)
+        {
+            StopFiring();
+            return;
+        }
+
         PlayerController.IsReloading = true;
         PlayerAnimator.SetBool("IsReloading", PlayerController.IsReloading);
         EquippedWeapon.StartReloading();
@@ -126,6 +155,11 @@ public class WeaponHolder : InputMonoBehaviour
         EquippedWeapon.StopReloading();
 
         CancelInvoke(nameof(StopReloading));
+
+        if (!WasFiring && !FiringPressed) return;
+
+        StartFiring();
+        WasFiring = false;
     }
 }
 

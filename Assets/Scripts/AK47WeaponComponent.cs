@@ -15,11 +15,13 @@ public class AK47WeaponComponent : WeaponComponent
     {
         ViewCamera = Camera.main;
     }
-    public override void FireWeapon()
+    protected override void FireWeapon()
     {
             WeaponStats.BulletsInClip--;
-            if (WeaponStats.BulletsInClip > 0 && !Reloading)
+            if (WeaponStats.BulletsInClip > 0 && !Reloading && !WeaponHolder.Controller.IsJumping)
             {
+                base.FireWeapon();
+
                 Ray screenRay = ViewCamera.ScreenPointToRay(new Vector3(Crosshair.CurrentAimPosition.x,
                          Crosshair.CurrentAimPosition.y, 0));
 
@@ -33,9 +35,9 @@ public class AK47WeaponComponent : WeaponComponent
 
                 WeaponStats.BulletsInClip--;
             }
-             else
+            else if (WeaponStats.BulletsInClip <= 0)
             {
-                StartReloading();
+                WeaponHolder.StopReloading();
             }
             //base.FireWeapon();
     }

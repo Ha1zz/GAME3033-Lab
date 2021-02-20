@@ -1,13 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Weapons
 {
+    public enum WeaponType
+    {
+        None,
+        MachineGun,
+        Pistol,
+
+    }
 
     [System.Serializable]
     public struct WeaponStats
     {
+        public WeaponType WeaponType;
         public string Name;
         public float Damage;
         public float BulletsInClip;
@@ -36,8 +45,8 @@ public class WeaponComponent : MonoBehaviour
         WeaponHolder = weaponHolder;
         Crosshair = crosshair;
     }
-    public bool Firing = false;
-    public bool Reloading = false;
+    public bool Firing { get; private set; }
+    public bool Reloading { get; private set; }
 
     public virtual void StartFiring()
     {
@@ -58,35 +67,35 @@ public class WeaponComponent : MonoBehaviour
         CancelInvoke(nameof(FireWeapon));
     }
 
-    public virtual void FireWeapon()
+    protected virtual void FireWeapon()
     {
-        
+        WeaponStats.BulletsInClip--;
     }
 
-    public void StartReloading()
+    public virtual void StartReloading()
     {
         Reloading = true;
         ReloadWeapon();
     }
 
-    public void StopReloading()
+    public virtual void StopReloading()
     {
-        //Reloading = false;
+        Reloading = false;
     }
 
-    public void ReloadWeapon()
+    protected virtual void ReloadWeapon()
     {
-        int bulletToReload = WeaponStats.TotalBulletsAvailable - WeaponStats.ClipSize;
+        int bulletToReload = WeaponStats.ClipSize - WeaponStats.TotalBulletsAvailable;
         if (bulletToReload < 0)
         {
-            WeaponStats.BulletsInClip += WeaponStats.TotalBulletsAvailable;
-            WeaponStats.TotalBulletsAvailable = 0;
+            WeaponStats.BulletsInClip = WeaponStats.ClipSize;
+            WeaponStats.TotalBulletsAvailable -= WeaponStats.ClipSize;
 
         }
         else
         {
-            WeaponStats.BulletsInClip = WeaponStats.ClipSize;
-            WeaponStats.TotalBulletsAvailable -= WeaponStats.ClipSize;
+            WeaponStats.BulletsInClip = WeaponStats.TotalBulletsAvailable;
+            WeaponStats.TotalBulletsAvailable = 0;
         }
     }
 }
