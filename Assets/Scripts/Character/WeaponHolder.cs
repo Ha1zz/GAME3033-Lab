@@ -58,7 +58,7 @@ public class WeaponHolder : InputMonoBehaviour
         }
 
         EquippedWeapon.Initialize(this, PlayerController.CrossHair);
-        //PlayerAnimator.SetInteger("WeaponType", (int)EquippedWeapon.WeaponStats.WeaponType);
+        PlayerAnimator.SetInteger("WeaponType", (int)EquippedWeapon.WeaponStats.WeaponType);
         PlayerEvents.Invoke_OnWeaponEquipped(EquippedWeapon);
     }
 
@@ -141,7 +141,7 @@ public class WeaponHolder : InputMonoBehaviour
         }
 
         PlayerController.IsReloading = true;
-        PlayerAnimator.SetBool("IsReloading", PlayerController.IsReloading);
+        PlayerAnimator.SetBool("IsReloading", true);
         EquippedWeapon.StartReloading();
 
         InvokeRepeating(nameof(StopReloading), 0, 0.1f);

@@ -28,6 +28,8 @@ namespace Character {
         private Vector2 InputVector = Vector2.zero;
         private Vector3 MoveDirection = Vector3.zero;
         private Rigidbody PlayerRigidbody;
+        private Vector3 NextPositionCheck = Vector3.zero;
+        [SerializeField] private float MoveDirectionBuffer = 2.0f;
 
         // Animator Hashes
 
@@ -65,15 +67,15 @@ namespace Character {
         {
             if (PlayerController.IsJumping) return;
 
-            PlayerController.IsJumping = true;
-            PlayerAnimator.SetBool(IsJumpingHash, true);
+            PlayerController.IsJumping = value.isPressed;
+            PlayerAnimator.SetBool(IsJumpingHash, value.isPressed);
 
-            PlayerNavMesh.enabled = false;
+            //PlayerNavMesh.enabled = false; ///////////////////////////////////////////
 
-            Invoke(nameof(Jump),0.1f);
+            PlayerRigidbody.AddForce((PlayerTransform.up + MoveDirection) * JumpForce, ForceMode.Impulse);
 
-            //PlayerRigidbody.AddForce((PlayerTransform.up + MoveDirection) * JumpForce, ForceMode.Impulse);
-        
+            //Invoke(nameof(Jump),0.1f);
+
         }
 
         public void Jump()
@@ -85,7 +87,7 @@ namespace Character {
         {
             if (!other.gameObject.CompareTag("Ground") && !PlayerController.IsJumping) return;
 
-            PlayerNavMesh.enabled = true;
+            //PlayerNavMesh.enabled = true; //////////////////////////////////////////
             PlayerController.IsJumping = false;
             PlayerAnimator.SetBool(IsJumpingHash, false);
         }
@@ -94,7 +96,7 @@ namespace Character {
         {
             if (PlayerController.IsJumping) return;
 
-            if (!(InputVector.magnitude > 0)) return;
+            //if (!(InputVector.magnitude > 0)) return;
 
             MoveDirection = PlayerTransform.forward * InputVector.y + PlayerTransform.right * InputVector.x;
 
@@ -102,12 +104,28 @@ namespace Character {
 
             Vector3 movementDirection = MoveDirection * (currentSpeed * Time.deltaTime);
 
+            NextPositionCheck = transform.position + MoveDirection * MoveDirectionBuffer;
+
+            if (NavMesh.SamplePosition(NextPositionCheck,out NavMeshHit hit,1f,NavMesh.AllAreas))
+            {
+                transform.position += movementDirection;
+            }
+
+
+
             PlayerNavMesh.Move(movementDirection);
 
             //PlayerTransform.position += movementDirection;
 
         }
 
+        private void OnGrewGizmos()
+        {
+            if (NextPositionCheck != Vector3.zero)
+            {
+                Gizmos.DrawSphere(NextPositionCheck, 0.5f);
+            }
+        }
 
     }
 
