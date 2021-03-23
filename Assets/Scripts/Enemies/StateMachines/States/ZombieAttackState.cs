@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Health_System;
 
 public class ZombieAttackState : ZombieStates
 {
     private GameObject FollowTarget;
+    private IDamagable DamagableObject;
     private float AttackRange = 1.5f;
 
     public ZombieAttackState(GameObject followTarget, ZombieComponent zombie, StateMachine stateMachine) : base(zombie, stateMachine)
@@ -20,11 +22,14 @@ public class ZombieAttackState : ZombieStates
         OwnerZombie.ZombieAnimator.SetFloat("MovementZ", 0.0f);
         OwnerZombie.ZombieAnimator.SetBool("IsAttacking", true);
 
+        DamagableObject = FollowTarget.GetComponent<IDamagable>();
     }
 
     public override void IntervalUpdate()
     {
         base.IntervalUpdate();
+
+        DamagableObject?.TakeDamage(OwnerZombie.ZombieDamage);
     }
 
     public override void Update()

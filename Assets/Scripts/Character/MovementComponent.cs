@@ -50,7 +50,6 @@ namespace Character {
 
         public void OnMovement(InputValue value)
         {
-            Debug.Log(value.Get());
             InputVector = value.Get<Vector2>();
 
             PlayerAnimator.SetFloat(MovementXHash, InputVector.x);
