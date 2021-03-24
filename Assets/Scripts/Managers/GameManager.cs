@@ -5,6 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    public string GameSaveName { get; private set; } = "";
+
     public bool CursorActive { get; private set; } = true;
 
     // Start is called before the first frame update
@@ -19,6 +22,13 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+    }
+
+    public void SetActiveSave(string saveName)
+    {
+        if (string.IsNullOrEmpty(saveName)) return;
+
+        GameSaveName = saveName;
     }
 
     private void EnableCursor(bool enable)
