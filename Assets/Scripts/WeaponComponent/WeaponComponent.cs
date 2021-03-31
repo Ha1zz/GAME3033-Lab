@@ -40,10 +40,13 @@ namespace Weapons
 
         protected WeaponHolder WeaponHolder;
         protected Crosshair Crosshair;
-        public void Initialize(WeaponHolder weaponHolder,Crosshair crosshair)
+        public void Initialize(WeaponHolder weaponHolder,WeaponScriptable weapon)
         {
             WeaponHolder = weaponHolder;
-            Crosshair = crosshair;
+            Crosshair = weaponHolder.Controller.CrossHair;
+
+
+            WeaponStats = weapon.WeaponStats;
         }
         public bool Firing { get; private set; }
         public bool Reloading { get; private set; }

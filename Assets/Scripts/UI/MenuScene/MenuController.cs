@@ -15,6 +15,12 @@ namespace UI.Menus
 
         private Dictionary<string, MenuWidget> Menus = new Dictionary<string, MenuWidget>();
 
+        private void Awake()
+        {
+            AppEvents.Invoke_OnMouseCursorEnable(true);
+        }
+
+
         private void Start()
         {
             DisableAllMenu();

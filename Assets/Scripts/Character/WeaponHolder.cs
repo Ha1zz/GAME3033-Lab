@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,7 +7,7 @@ using Weapons;
 public class WeaponHolder : InputMonoBehaviour
 {
     [Header("Weapon To Spawn"), SerializeField]
-    private GameObject WeaponToSpawn;
+    private WeaponScriptable WeaponToSpawn;
 
     [SerializeField]
     private Transform WeaponSocketLocation;
@@ -45,21 +46,26 @@ public class WeaponHolder : InputMonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject spawnedWeapon = Instantiate(WeaponToSpawn, WeaponSocketLocation.position, WeaponSocketLocation.rotation, WeaponSocketLocation);
+        //GameObject spawnedWeapon = Instantiate(WeaponToSpawn, WeaponSocketLocation.position, WeaponSocketLocation.rotation, WeaponSocketLocation);
 
-        if (!spawnedWeapon) return;
-        if (spawnedWeapon)
-        {
-            EquippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
-            if (EquippedWeapon)
-            {
-                GripIKLocation = EquippedWeapon.GripLocation;
-            }
-        }
+        //if (!spawnedWeapon) return;
+        //if (spawnedWeapon)
+        //{
+        //    EquippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
+        //    if (EquippedWeapon)
+        //    {
+        //        GripIKLocation = EquippedWeapon.GripLocation;
+        //    }
+        //}
 
-        EquippedWeapon.Initialize(this, PlayerController.CrossHair);
-        PlayerAnimator.SetInteger("WeaponType", (int)EquippedWeapon.WeaponStats.WeaponType);
-        PlayerEvents.Invoke_OnWeaponEquipped(EquippedWeapon);
+        //EquippedWeapon.Initialize(this, PlayerController.CrossHair);
+        //PlayerAnimator.SetInteger("WeaponType", (int)EquippedWeapon.WeaponStats.WeaponType);
+        //PlayerEvents.Invoke_OnWeaponEquipped(EquippedWeapon);
+
+        //if (WeaponToSpawn) EquipWeapon(WeaponToSpawn);
+
+
+
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -161,6 +167,33 @@ public class WeaponHolder : InputMonoBehaviour
         StartFiring();
         WasFiring = false;
     }
+
+    public void EquipWeapon(WeaponScriptable weaponScripable)
+    {
+        GameObject spawnedWeapon = Instantiate(weaponScripable.ItemPrefab, WeaponSocketLocation.position, WeaponSocketLocation.rotation, WeaponSocketLocation);
+
+        if (!spawnedWeapon) return;
+        if (spawnedWeapon)
+        {
+            EquippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
+            if (EquippedWeapon)
+            {
+                GripIKLocation = EquippedWeapon.GripLocation;
+            }
+        }
+
+        EquippedWeapon.Initialize(this, weaponScripable);
+        PlayerAnimator.SetInteger("WeaponType", (int)EquippedWeapon.WeaponStats.WeaponType);
+        PlayerEvents.Invoke_OnWeaponEquipped(EquippedWeapon);
+    }
+
+    public void UnEquipWeapon()
+    {
+        Destroy(EquippedWeapon.gameObject);
+        EquippedWeapon = null;
+    }
+
+
 }
 
 

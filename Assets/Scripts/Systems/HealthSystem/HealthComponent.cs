@@ -14,8 +14,22 @@ namespace System.Health_System
 
         [SerializeField] private float CurrentHealth;
         [SerializeField] private float TotalHealth;
+
+        public void HealPlayer(int effect)
+        {
+            if (CurrentHealth < MaxHealth && CurrentHealth > 0)
+            {
+                CurrentHealth += effect;
+            }
+
+            if (CurrentHealth <= 0)
+            {
+                Destroy();
+            }
+        }
+
         // Start is called before the first frame update
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             CurrentHealth = TotalHealth;
         }
