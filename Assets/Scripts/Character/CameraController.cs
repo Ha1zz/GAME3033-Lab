@@ -41,7 +41,7 @@ namespace Character
             //        Mathf.Lerp(PreviousMouseInput.x, aimValue.x, 1f / HorizontalDamping) * RotationSpeed,
             //        transform.up
             //        );
-            //transform.rotation = Quaternion.Euler(0, FollowTargetTransform.transform.rotation.eulerAngles.y ,0);
+            //transform.rotation = Quaternion.Euler(0, FollowTargetTransform.transform.rotation.eulerAngles.y, 0);
 
             //FollowTargetTransform.localEulerAngles = Vector3.zero;
 

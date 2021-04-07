@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemPickUpComponent : MonoBehaviour
 {
     [SerializeField] ItemScriptables PickUpItem;
-    [SerializeField] private int Amount = -1;
+    [SerializeField] private int Amount = 1;
 
     [SerializeField] private MeshRenderer PropMeshRenderer;
     [SerializeField] private MeshFilter PropMeshFilter;
@@ -45,9 +45,16 @@ public class ItemPickUpComponent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+      
         if (!other.CompareTag("Player")) return;
+        Debug.Log($"{PickUpItem.Name} - Pickup Up");
+        InventoryComponent playerInventory = other.GetComponent<InventoryComponent>();
 
-        ItemInstance.UseItem(other.GetComponent<PlayerController>());
+        if (playerInventory) playerInventory.AddItem(ItemInstance, Amount);
+
+        Destroy(gameObject);
+
+        //ItemInstance.UseItem(other.GetComponent<PlayerController>());
     }
 
 }

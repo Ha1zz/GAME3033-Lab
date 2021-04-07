@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour,IPausable
     public bool IsReloading;
     public bool IsJumping;
     public bool IsRunning;
+    public bool InInventory;
+
     private void Awake()
     {
         if (GameUIController == null) GameUIController = FindObjectOfType<GameUIController>();
@@ -53,6 +55,36 @@ public class PlayerController : MonoBehaviour,IPausable
     {
         PauseManager.Instance.PauseGame();
     }
+
+    public void OnInventory(InputValue button)
+    {
+        if (InInventory)
+        {
+            InInventory = false;
+            OpenInventory(false);
+        }
+        else
+        {
+            InInventory = true;
+            OpenInventory(true);
+        }
+
+    }
+
+    private void OpenInventory(bool open)
+    {
+        if (open)
+        {
+            PauseManager.Instance.PauseGame();
+            GameUIController.EnableInventoryMenu();
+        }
+        else
+        {
+            PauseManager.Instance.UnPauseGame();
+            GameUIController.EnableGameMenu();
+        }
+    }
+
 
     public void OnUnPauseGame()
     {

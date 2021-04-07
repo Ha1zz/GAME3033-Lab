@@ -70,6 +70,9 @@ public class WeaponHolder : InputMonoBehaviour
 
     private void OnAnimatorIK(int layerIndex)
     {
+        if (GripIKLocation == null) return;
+
+
         PlayerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1f);
         PlayerAnimator.SetIKPosition(AvatarIKGoal.LeftHand, GripIKLocation.position);
     }
@@ -107,6 +110,9 @@ public class WeaponHolder : InputMonoBehaviour
     public void OnFire(InputValue button)
     {
         FiringPressed = button.isPressed;
+
+        if (EquippedWeapon == null) return;
+
         if (button.isPressed)
         {
             StartFiring();
