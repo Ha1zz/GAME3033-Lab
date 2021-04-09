@@ -2,34 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieSpawner : MonoBehaviour
+
+namespace Enemies.Spawners
 {
-    [SerializeField] private GameObject[] ZombiePrefabs;
-    [SerializeField] private int NumberOfZombieToSpawn;
-    [SerializeField] private SpawnerVolume[] SpawnVolumes;
 
-    private GameObject FollowGameObject;
-
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(SpawnerStateMachine))]
+    public class ZombieSpawner : MonoBehaviour
     {
-        FollowGameObject = GameObject.FindGameObjectWithTag("Player");
+        [SerializeField] public GameObject[] ZombiePrefabs;
+        public int NumberOfZombieToSpawn;
+        public SpawnerVolume[] SpawnVolumes;
 
-        for (int zombieCount = 0; zombieCount < NumberOfZombieToSpawn; zombieCount++)
+        public GameObject TargetObject => FollowGameObject;
+        private GameObject FollowGameObject;
+
+        private SpawnerStateMachine StateMachine;
+
+        private void Awake()
         {
-            SpawnZombie();
+            StateMachine = GetComponent<SpawnerStateMachine>();
+            FollowGameObject = GameObject.FindGameObjectWithTag("Player");
         }
-    }
 
-    private void SpawnZombie()
-    {
-        GameObject zombieToSpawn = ZombiePrefabs[Random.Range(0, ZombiePrefabs.Length)];
-        SpawnerVolume spawnVolumes = SpawnVolumes[Random.Range(0, SpawnVolumes.Length)];
 
-        GameObject zombie = 
-            Instantiate(zombieToSpawn, spawnVolumes.GetPositionInbounds(), spawnVolumes.transform.rotation);
+        // Start is called before the first frame update
+        void Start()
+        {
+            ZombieWaveSpawnerState beginnerWave = new ZombieWaveSpawnerState(this, StateMachine)
+            {
+                ZombiesToSpawn = 5,
+                NextState = SpawnerStateEnum.Complete
+            };
+            StateMachine.AddState(SpawnerStateEnum.Beginner, beginnerWave);
 
-        zombie.GetComponent<ZombieComponent>().Initialize(FollowGameObject);
+            StateMachine.Initialize(SpawnerStateEnum.Beginner);
+
+
+            //for (int zombieCount = 0; zombieCount < NumberOfZombieToSpawn; zombieCount++)
+            //{
+            //    SpawnZombie();
+            //}
+        }
+
+        //private void SpawnZombie()
+        //{
+        //    GameObject zombieToSpawn = ZombiePrefabs[Random.Range(0, ZombiePrefabs.Length)];
+        //    SpawnerVolume spawnVolumes = SpawnVolumes[Random.Range(0, SpawnVolumes.Length)];
+
+        //    GameObject zombie =
+        //        Instantiate(zombieToSpawn, spawnVolumes.GetPositionInbounds(), spawnVolumes.transform.rotation);
+
+        //    zombie.GetComponent<ZombieComponent>().Initialize(FollowGameObject);
+        //}
+
     }
 
 }
+
+

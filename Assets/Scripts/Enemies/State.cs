@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class State : MonoBehaviour
+public class State<T> where T : Enum
 {
-    protected StateMachine StateMachine;
+    protected StateMachine<T> StateMachine;
     public float UpdateInterval { get; protected set; } = 1.0f;
 
 
-    protected State(StateMachine stateMachine)
+    protected State(StateMachine<T> stateMachine)
     {
         StateMachine = stateMachine;
     }

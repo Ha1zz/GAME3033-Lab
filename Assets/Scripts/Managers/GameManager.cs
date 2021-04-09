@@ -6,9 +6,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public string GameSaveName { get; private set; } = "";
+    //public string GameSaveName { get; private set; } = "";
 
     public bool CursorActive { get; private set; } = true;
+
+    public string SelectedSaveName { get; set; } = "";
+
 
     // Start is called before the first frame update
     private void Awake()
@@ -28,7 +31,7 @@ public class GameManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(saveName)) return;
 
-        GameSaveName = saveName;
+        SelectedSaveName = saveName;
     }
 
     private void EnableCursor(bool enable)

@@ -68,6 +68,22 @@
                     "expectedControlType": "Button",
                     "processors": "NormalizeVector2",
                     "interactions": "Press"
+                },
+                {
+                    "name": "Save",
+                    "type": "Button",
+                    "id": "8b3787c9-dacb-4d56-ada5-f983e617e24f",
+                    "expectedControlType": "Button",
+                    "processors": "NormalizeVector2",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Load",
+                    "type": "Button",
+                    "id": "b3fcae25-e37d-4eb9-ab85-f640075ddd94",
+                    "expectedControlType": "Button",
+                    "processors": "NormalizeVector2",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -200,6 +216,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9b05ff0b-1807-4e56-9608-fe255ed8861e",
+                    "path": "<Keyboard>/f5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Save",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1458133d-baee-4bcc-951e-00ec0965de78",
+                    "path": "<Keyboard>/f6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Load",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

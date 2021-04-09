@@ -637,6 +637,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2129671758589207284, guid: 50a2b1b5ffd334c418ba7cb6d314cf84, type: 3}
+      propertyPath: Debug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129671758589207284, guid: 50a2b1b5ffd334c418ba7cb6d314cf84, type: 3}
       propertyPath: SceneToLoad
       value: Demo_City_Playable
       objectReference: {fileID: 0}

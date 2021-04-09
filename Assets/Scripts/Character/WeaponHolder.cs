@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Weapons;
+using Character;
+
 public class WeaponHolder : InputMonoBehaviour
 {
     [Header("Weapon To Spawn"), SerializeField]
@@ -26,7 +28,9 @@ public class WeaponHolder : InputMonoBehaviour
 
     // Ref
     private Camera ViewCamera;
-    private WeaponComponent EquippedWeapon;
+
+    public WeaponComponent EquippedWeapon => WeaponComponent;
+    private WeaponComponent WeaponComponent;
 
     // AnimatorHashes
 
@@ -51,16 +55,16 @@ public class WeaponHolder : InputMonoBehaviour
         //if (!spawnedWeapon) return;
         //if (spawnedWeapon)
         //{
-        //    EquippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
-        //    if (EquippedWeapon)
+        //    WeaponComponent = spawnedWeapon.GetComponent<WeaponComponent>();
+        //    if (WeaponComponent)
         //    {
-        //        GripIKLocation = EquippedWeapon.GripLocation;
+        //        GripIKLocation = WeaponComponent.GripLocation;
         //    }
         //}
 
-        //EquippedWeapon.Initialize(this, PlayerController.CrossHair);
-        //PlayerAnimator.SetInteger("WeaponType", (int)EquippedWeapon.WeaponStats.WeaponType);
-        //PlayerEvents.Invoke_OnWeaponEquipped(EquippedWeapon);
+        //WeaponComponent.Initialize(this, PlayerController.CrossHair);
+        //PlayerAnimator.SetInteger("WeaponType", (int)WeaponComponent.WeaponStats.WeaponType);
+        //PlayerEvents.Invoke_OnWeaponEquipped(WeaponComponent);
 
         //if (WeaponToSpawn) EquipWeapon(WeaponToSpawn);
 
@@ -88,19 +92,19 @@ public class WeaponHolder : InputMonoBehaviour
 
     private void StartFiring()
     {
-        if (EquippedWeapon.WeaponStats.TotalBulletsAvailable <= 0 &&
-            EquippedWeapon.WeaponStats.BulletsInClip <= 0) return;
+        if (WeaponComponent.WeaponStats.TotalBulletsAvailable <= 0 &&
+            WeaponComponent.WeaponStats.BulletsInClip <= 0) return;
 
         PlayerController.IsFiring = true;
         PlayerAnimator.SetBool("IsFiring", PlayerController.IsFiring);
-        EquippedWeapon.StartFiring();
+        WeaponComponent.StartFiring();
     }
 
     private void StopFiring()
     {
         PlayerController.IsFiring = false;
         PlayerAnimator.SetBool("IsFiring", PlayerController.IsFiring);
-        EquippedWeapon.StopFiring();
+        WeaponComponent.StopFiring();
     }
 
     public void OnReload(InputValue button)
@@ -111,7 +115,7 @@ public class WeaponHolder : InputMonoBehaviour
     {
         FiringPressed = button.isPressed;
 
-        if (EquippedWeapon == null) return;
+        if (WeaponComponent == null) return;
 
         if (button.isPressed)
         {
@@ -145,7 +149,7 @@ public class WeaponHolder : InputMonoBehaviour
 
     public void StartReloading()
     {
-        if (EquippedWeapon.WeaponStats.TotalBulletsAvailable <= 0 &&
+        if (WeaponComponent.WeaponStats.TotalBulletsAvailable <= 0 &&
             PlayerController.IsFiring)
         {
             StopFiring();
@@ -154,7 +158,7 @@ public class WeaponHolder : InputMonoBehaviour
 
         PlayerController.IsReloading = true;
         PlayerAnimator.SetBool("IsReloading", true);
-        EquippedWeapon.StartReloading();
+        WeaponComponent.StartReloading();
 
         InvokeRepeating(nameof(StopReloading), 0, 0.1f);
     }
@@ -164,7 +168,7 @@ public class WeaponHolder : InputMonoBehaviour
         if (PlayerAnimator.GetBool("IsReloading")) return;
 
         PlayerController.IsReloading = false;
-        EquippedWeapon.StopReloading();
+        WeaponComponent.StopReloading();
 
         CancelInvoke(nameof(StopReloading));
 
@@ -181,22 +185,22 @@ public class WeaponHolder : InputMonoBehaviour
         if (!spawnedWeapon) return;
         if (spawnedWeapon)
         {
-            EquippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
-            if (EquippedWeapon)
+            WeaponComponent = spawnedWeapon.GetComponent<WeaponComponent>();
+            if (WeaponComponent)
             {
-                GripIKLocation = EquippedWeapon.GripLocation;
+                GripIKLocation = WeaponComponent.GripLocation;
             }
         }
 
-        EquippedWeapon.Initialize(this, weaponScripable);
-        PlayerAnimator.SetInteger("WeaponType", (int)EquippedWeapon.WeaponStats.WeaponType);
-        PlayerEvents.Invoke_OnWeaponEquipped(EquippedWeapon);
+        WeaponComponent.Initialize(this, weaponScripable);
+        PlayerAnimator.SetInteger("WeaponType", (int)WeaponComponent.WeaponStats.WeaponType);
+        PlayerEvents.Invoke_OnWeaponEquipped(WeaponComponent);
     }
 
     public void UnEquipWeapon()
     {
-        Destroy(EquippedWeapon.gameObject);
-        EquippedWeapon = null;
+        Destroy(WeaponComponent.gameObject);
+        WeaponComponent = null;
     }
 
 

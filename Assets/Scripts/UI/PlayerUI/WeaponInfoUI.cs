@@ -39,6 +39,8 @@ public class WeaponInfoUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (!EquippedWeapon) return;
         CurrentClipText.text = EquippedWeapon.WeaponStats.BulletsInClip.ToString();
         TotalAmmoText.text = EquippedWeapon.WeaponStats.TotalBulletsAvailable.ToString();
     }
