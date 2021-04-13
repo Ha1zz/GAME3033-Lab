@@ -1347,6 +1347,7 @@ GameObject:
   - component: {fileID: 2400130058266668102}
   - component: {fileID: 2049494781514738183}
   - component: {fileID: 5406074904761163048}
+  - component: {fileID: 8266594633802017832}
   m_Layer: 0
   m_Name: Zombie_Bellboy
   m_TagString: Untagged
@@ -1498,7 +1499,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de8229771e80b0468562a34241e413f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 1
   FollowTarget: {fileID: 0}
+  Debug: 0
+--- !u!114 &8266594633802017832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094180770326891803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8d7801a487d7848b5dc4da6c4b09c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentHealth: 10
+  TotalHealth: 0
 --- !u!1 &3094217785224614379
 GameObject:
   m_ObjectHideFlags: 0

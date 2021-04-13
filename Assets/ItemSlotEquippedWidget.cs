@@ -26,7 +26,7 @@ public class ItemSlotEquippedWidget : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    internal void Initialize(ItemScriptables item)
+    public void Initialize(ItemScriptables item)
     {
         if (!(item is EquippableScriptable eqItem)) return;
 

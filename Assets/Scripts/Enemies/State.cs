@@ -5,7 +5,7 @@ using UnityEngine;
 public class State : MonoBehaviour
 {
     protected StateMachine StateMachine;
-    public float UpdateInterval { get; protected set; } = 1.0f;
+    public float UpdateInterval { get; protected set; } = 3.0f;
 
 
     protected State(StateMachine stateMachine)

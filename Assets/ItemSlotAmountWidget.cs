@@ -27,9 +27,9 @@ public class ItemSlotAmountWidget : MonoBehaviour
     }
 
 
-    internal void Initialize(ItemScriptables item)
+    public void Initialize(ItemScriptables item)
     {
-        if (!Item.Stackable) return;
+        if (!item.Stackable) return;
 
         Item = item;
         ShowWidget();
@@ -41,6 +41,7 @@ public class ItemSlotAmountWidget : MonoBehaviour
     private void OnAmountChange()
     {
         AmountText.text = Item.Amount.ToString();
+
     }
 
     private void OnDisable()

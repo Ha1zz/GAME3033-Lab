@@ -12,7 +12,7 @@ public class ZombieAttackState : ZombieStates
     public ZombieAttackState(GameObject followTarget, ZombieComponent zombie, StateMachine stateMachine) : base(zombie, stateMachine)
     {
         FollowTarget = followTarget;
-        UpdateInterval = 2.0f;
+        UpdateInterval = 4.0f;
     }
 
     public override void Start()

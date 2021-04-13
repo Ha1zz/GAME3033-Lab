@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Character;
 
 public class ItemPickUpComponent : MonoBehaviour
 {
@@ -45,16 +46,34 @@ public class ItemPickUpComponent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-      
         if (!other.CompareTag("Player")) return;
-        Debug.Log($"{PickUpItem.Name} - Pickup Up");
-        InventoryComponent playerInventory = other.GetComponent<InventoryComponent>();
+        if (this.gameObject.tag == "AK47")
+        {
+            //ItemInstance.UseItem(other.GetComponent<PlayerController>());
+            if (!other.CompareTag("Player")) return;
+            Debug.Log($"{PickUpItem.Name} - Pickup Up");
+            InventoryComponent playerInventory = other.GetComponent<InventoryComponent>();
 
-        if (playerInventory) playerInventory.AddItem(ItemInstance, Amount);
+            if (playerInventory) playerInventory.AddItem(ItemInstance, Amount);
+        }
+        else
+        {
+            if (!other.CompareTag("Player")) return;
+            Debug.Log($"{PickUpItem.Name} - Pickup Up");
+            InventoryComponent playerInventory = other.GetComponent<InventoryComponent>();
 
-        Destroy(gameObject);
+            if (playerInventory) playerInventory.AddItem(ItemInstance, Amount);
+        }
+
+        //if (!other.CompareTag("Player")) return;
+        //Debug.Log($"{PickUpItem.Name} - Pickup Up");
+        //InventoryComponent playerInventory = other.GetComponent<InventoryComponent>();
+
+        //if (playerInventory) playerInventory.AddItem(ItemInstance, Amount);
 
         //ItemInstance.UseItem(other.GetComponent<PlayerController>());
+
+        Destroy(gameObject);
     }
 
 }

@@ -636,6 +636,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2129671758584696113, guid: 50a2b1b5ffd334c418ba7cb6d314cf84, type: 3}
+      propertyPath: m_text
+      value: Save 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129671758584696113, guid: 50a2b1b5ffd334c418ba7cb6d314cf84, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129671758589207284, guid: 50a2b1b5ffd334c418ba7cb6d314cf84, type: 3}
+      propertyPath: Debug
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2129671758589207284, guid: 50a2b1b5ffd334c418ba7cb6d314cf84, type: 3}
       propertyPath: SceneToLoad
       value: Demo_City_Playable
@@ -643,6 +655,10 @@ PrefabInstance:
     - target: {fileID: 2129671758589207288, guid: 50a2b1b5ffd334c418ba7cb6d314cf84, type: 3}
       propertyPath: m_Name
       value: LoadMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129671758589207288, guid: 50a2b1b5ffd334c418ba7cb6d314cf84, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2129671758589207289, guid: 50a2b1b5ffd334c418ba7cb6d314cf84, type: 3}
       propertyPath: m_Pivot.x
@@ -738,6 +754,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1394816731}
     m_Modifications:
+    - target: {fileID: 3504119053026485570, guid: eb21e90a61bf9b545ad2a58ab1f107a6, type: 3}
+      propertyPath: OptionsMenuName
+      value: Options Menu
+      objectReference: {fileID: 0}
     - target: {fileID: 3504119053026485573, guid: eb21e90a61bf9b545ad2a58ab1f107a6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -826,6 +846,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 3504119053026485574, guid: eb21e90a61bf9b545ad2a58ab1f107a6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb21e90a61bf9b545ad2a58ab1f107a6, type: 3}
 --- !u!1001 &4828787258419002320
@@ -838,6 +862,10 @@ PrefabInstance:
     - target: {fileID: 4828787257780093393, guid: 48d2cae5a7b62fb489dc2f9411dda300, type: 3}
       propertyPath: m_Name
       value: OptionsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4828787257780093393, guid: 48d2cae5a7b62fb489dc2f9411dda300, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4828787257780093394, guid: 48d2cae5a7b62fb489dc2f9411dda300, type: 3}
       propertyPath: m_Pivot.x

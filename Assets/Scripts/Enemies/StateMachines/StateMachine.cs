@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : MonoBehaviour
+public class StateMachine : MonoBehaviour 
 {
     public State CurrentState { get;  private set; }
     protected Dictionary<ZombieStateType, State> States;

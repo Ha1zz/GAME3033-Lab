@@ -22,6 +22,8 @@ namespace UI.Menus
         [SerializeField] GameObject SaveSlotPrefab;
 
         private const string SaveFileKey = "FileSaveData";
+        private const string GameSceneName = "Demo_City_Playable";
+
 
         [SerializeField] private bool Debug;
 
@@ -31,7 +33,7 @@ namespace UI.Menus
             if (Debug) SaveDebugData();
 
             WipeChildren();
-            LoadGameData();
+            LoadFileList();
         }
 
         private void WipeChildren()
@@ -50,7 +52,7 @@ namespace UI.Menus
             PlayerPrefs.SetString(SaveFileKey, JsonUtility.ToJson(dataList));
         }
 
-        private void LoadGameData()
+        private void LoadFileList()
         {
             if (!PlayerPrefs.HasKey(SaveFileKey)) return;
 
@@ -61,7 +63,9 @@ namespace UI.Menus
 
             foreach (string saveName in GameData.SaveFileNames)
             {
-                SaveSlotWidget widget = Instantiate(SaveSlotPrefab,LoadItemPanel).GetComponent<SaveSlotWidget>();
+                //RectTransform widget = Instantiate(SaveSlotPrefab).GetComponent<RectTransform>();
+
+                SaveSlotWidget widget = Instantiate(SaveSlotPrefab, LoadItemPanel).GetComponent<SaveSlotWidget>();
                 widget.Initialize(this, saveName);
             }
         }
