@@ -50,6 +50,11 @@ namespace System.Health_System
         {
             Destroy(gameObject);
         }
+
+        internal void SetCurrentHealth(float health)
+        {
+            CurrentHealth = health;
+        }
     }
 }
 

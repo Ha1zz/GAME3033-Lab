@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
 using System;
 
@@ -11,15 +10,16 @@ public class IconSlot : MonoBehaviour
     private ItemScriptables Item;
 
     private Button ItemButton;
-    private TMP_Text ItemText;
+    //private TMP_Text ItemText;
 
+    [SerializeField] private TMP_Text ItemText;
     [SerializeField] private ItemSlotAmountWidget AmountWidget;
     [SerializeField] private ItemSlotEquippedWidget EquippedWidget;
 
     private void Awake()
     {
         ItemButton = GetComponent<Button>();
-        ItemText = GetComponent<TMP_Text>();
+        ItemText = GetComponentInChildren<TMP_Text>();
         //AmountWidget = GetComponentInChildren<ItemSlotAmountWidget>();
         //EquippedWidget = GetComponentInChildren<ItemSlotEquippedWidget>();
     }
@@ -30,7 +30,6 @@ public class IconSlot : MonoBehaviour
         ItemText.text = item.Name;
         AmountWidget.Initialize(item);
         EquippedWidget.Initialize(item);
-
         ItemButton.onClick.AddListener(UseItem);
         Item.OnItemDestroyed += OnItemDestroyed;
     }
@@ -46,6 +45,11 @@ public class IconSlot : MonoBehaviour
         Item = null;
         Destroy(gameObject);
     }
+
+    private void Update()
+    {
+    }
+
 
     private void OnDisable()
     {

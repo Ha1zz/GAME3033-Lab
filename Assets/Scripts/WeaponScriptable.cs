@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Weapons;
+using Character;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Items/Weapon", order = 1)]
 public class WeaponScriptable : EquippableScriptable

@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbe81260690d5864bb70344fee497a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemText: {fileID: 6467857910955496449}
   AmountWidget: {fileID: 389263575}
   EquippedWidget: {fileID: 529490713}
 --- !u!114 &1147315983
@@ -184,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -247,7 +249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.033256, y: 24.999985}
+  m_AnchoredPosition: {x: 0.033272, y: 25}
   m_SizeDelta: {x: 200.06654, y: 150.00023}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6467857910058516954
@@ -300,7 +302,7 @@ GameObject:
   - component: {fileID: 6467857910499649696}
   - component: {fileID: 6467857910499649699}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AmountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

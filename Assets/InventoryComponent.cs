@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Character;
 
 public class InventoryComponent : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class InventoryComponent : MonoBehaviour
             {
                 listItem.ChangeAmount(item.Amount);
             }
+            //Items.Add(listItem);
+            //listItem.Initialize(Controller);
         }
         else
         {
